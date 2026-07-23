@@ -131,6 +131,27 @@ private:
         std::cout << node->value << " ";
     }
 
+    void printTreeHelper(Node* node, std::string prefix, bool isLast) {
+        if (node == nullptr) {
+            return;
+        }
+
+        std::cout << prefix;
+        std::cout << (isLast ? "└── " : "├── ");
+        std::cout << node->value << std::endl;
+
+        std::string childPrefix = prefix + (isLast ? "    " : "│   ");
+
+        if (node->left != nullptr || node->right != nullptr) {
+            if (node->left != nullptr) {
+                printTreeHelper(node->left, childPrefix, node->right == nullptr);
+            }
+            if (node->right != nullptr) {
+                printTreeHelper(node->right, childPrefix, true);
+            }
+        }
+    }
+
 public:
     BST() : root(nullptr) {}
 
@@ -166,6 +187,10 @@ public:
         std::cout << "Postordine: ";
         postorderHelper(root);
         std::cout << std::endl;
+    }
+
+    void printTree() {
+        printTreeHelper(root, "", true);
     }
 };
 
