@@ -14,8 +14,10 @@ int main() {
     std::cout << tree.search(6) << std::endl;
     std::cout << tree.search(15) << std::endl;
 
-    tree.remove(10);
     tree.print();
+    tree.printInorder();
+    tree.printPreorder();
+    tree.printPostorder();
 
     return 0;
 }

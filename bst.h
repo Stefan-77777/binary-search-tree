@@ -104,6 +104,33 @@ private:
         return node;
     }
 
+    void inorderHelper(Node* node) {
+        if (node == nullptr) {
+            return;
+        }
+        inorderHelper(node->left);
+        std::cout << node->value << " ";
+        inorderHelper(node->right);
+    }
+
+    void preorderHelper(Node* node) {
+        if (node == nullptr) {
+            return;
+        }
+        std::cout << node->value << " ";
+        preorderHelper(node->left);
+        preorderHelper(node->right);
+    }
+
+    void postorderHelper(Node* node) {
+        if (node == nullptr) {
+            return;
+        }
+        postorderHelper(node->left);
+        postorderHelper(node->right);
+        std::cout << node->value << " ";
+    }
+
 public:
     BST() : root(nullptr) {}
 
@@ -121,6 +148,24 @@ public:
 
     void remove(int val) {
         root = removeHelper(root, val);
+    }
+
+    void printInorder() {
+        std::cout << "Inordine: ";
+        inorderHelper(root);
+        std::cout << std::endl;
+    }
+
+    void printPreorder() {
+        std::cout << "Preordine: ";
+        preorderHelper(root);
+        std::cout << std::endl;
+    }
+
+    void printPostorder() {
+        std::cout << "Postordine: ";
+        postorderHelper(root);
+        std::cout << std::endl;
     }
 };
 
