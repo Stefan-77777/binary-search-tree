@@ -59,6 +59,51 @@ private:
         printHelper(node->left, depth + 1);
     }
 
+    Node* removeHelper(Node* node, int val) {
+        if (node == nullptr) {
+            return nullptr;
+        }
+
+        if (val < node->value) {
+            node->left = removeHelper(node->left, val);
+        } else if (val > node->value) {
+            node->right = removeHelper(node->right, val);
+        } else {
+
+            // Caz 1: frunza (fara copii)
+            if (node->left == nullptr && node->right == nullptr) {
+                delete node;
+                return nullptr;
+            }
+
+            // Caz 2: un singur copil
+            if(node->left == nullptr) {
+                Node* temp = node->right;
+                delete node;
+                return temp;
+            }
+            if(node->right == nullptr) {
+                Node* temp = node->left;
+                delete node;
+                return temp;
+            }
+
+            // Caz 3: doi copii
+            Node* succesor = findMin(node->right);
+            node->value = succesor->value;
+            node->right = removeHelper(node->right, succesor->value);
+        }
+
+        return node;
+    }
+
+    Node* findMin(Node* node) {
+        while (node->left != nullptr) {
+            node = node->left;
+        }
+        return node;
+    }
+
 public:
     BST() : root(nullptr) {}
 
@@ -72,6 +117,10 @@ public:
 
     void print() {
         printHelper(root, 0);
+    }
+
+    void remove(int val) {
+        root = removeHelper(root, val);
     }
 };
 
