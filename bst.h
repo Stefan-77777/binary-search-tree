@@ -1,5 +1,6 @@
 #ifndef BST_H
 #define BST_H
+#include <iostream>
 
 struct Node {
     int value;
@@ -42,7 +43,22 @@ private:
             return searchHelper(node->right, val);
         }
     }
-    
+
+    void printHelper(Node* node, int depth) {
+        if (node == nullptr) {
+            return;
+        }
+        
+        printHelper(node->right, depth + 1);
+
+        for (int i = 0; i < depth * 4; i++) {
+            std::cout << " ";
+        }
+        std::cout << node->value << std::endl;
+
+        printHelper(node->left, depth + 1);
+    }
+
 public:
     BST() : root(nullptr) {}
 
@@ -52,6 +68,10 @@ public:
 
     bool search(int val) {
         return searchHelper(root, val);
+    }
+
+    void print() {
+        printHelper(root, 0);
     }
 };
 
