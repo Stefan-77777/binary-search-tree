@@ -27,11 +27,31 @@ private:
         return node;
     }
 
+    bool searchHelper(Node* node, int val) {
+        if (node == nullptr) {
+            return false;
+        }
+
+        if (val == node->value) {
+            return true;
+        }
+
+        if (val < node->value) {
+            return searchHelper(node->left, val);
+        } else {
+            return searchHelper(node->right, val);
+        }
+    }
+    
 public:
     BST() : root(nullptr) {}
 
     void insert(int val) {
         root = insertHelper(root, val);
+    }
+
+    bool search(int val) {
+        return searchHelper(root, val);
     }
 };
 
