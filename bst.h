@@ -4,17 +4,17 @@
 
 struct Node {
     int value;
-    Node* left;
-    Node* right;
+    Node *left;
+    Node *right;
 
     Node(int val) : value(val), left(nullptr), right(nullptr) {}
 };
 
 class BST {
 private:
-    Node* root;
+    Node *root;
 
-    Node* insertHelper(Node* node, int val) {
+    Node *insertHelper(Node *node, int val) {
         if(node == nullptr) {
             return new Node(val);
         }
@@ -28,7 +28,7 @@ private:
         return node;
     }
 
-    bool searchHelper(Node* node, int val) {
+    bool searchHelper(Node *node, int val) {
         if (node == nullptr) {
             return false;
         }
@@ -44,7 +44,7 @@ private:
         }
     }
 
-    void printHelper(Node* node, int depth) {
+    void printHelper(Node *node, int depth) {
         if (node == nullptr) {
             return;
         }
@@ -59,7 +59,7 @@ private:
         printHelper(node->left, depth + 1);
     }
 
-    Node* removeHelper(Node* node, int val) {
+    Node *removeHelper(Node *node, int val) {
         if (node == nullptr) {
             return nullptr;
         }
@@ -78,18 +78,18 @@ private:
 
             // Caz 2: un singur copil
             if(node->left == nullptr) {
-                Node* temp = node->right;
+                Node *temp = node->right;
                 delete node;
                 return temp;
             }
             if(node->right == nullptr) {
-                Node* temp = node->left;
+                Node *temp = node->left;
                 delete node;
                 return temp;
             }
 
             // Caz 3: doi copii
-            Node* succesor = findMin(node->right);
+            Node *succesor = findMin(node->right);
             node->value = succesor->value;
             node->right = removeHelper(node->right, succesor->value);
         }
@@ -97,14 +97,14 @@ private:
         return node;
     }
 
-    Node* findMin(Node* node) {
+    Node *findMin(Node *node) {
         while (node->left != nullptr) {
             node = node->left;
         }
         return node;
     }
 
-    void inorderHelper(Node* node) {
+    void inorderHelper(Node *node) {
         if (node == nullptr) {
             return;
         }
@@ -113,7 +113,7 @@ private:
         inorderHelper(node->right);
     }
 
-    void preorderHelper(Node* node) {
+    void preorderHelper(Node *node) {
         if (node == nullptr) {
             return;
         }
@@ -122,7 +122,7 @@ private:
         preorderHelper(node->right);
     }
 
-    void postorderHelper(Node* node) {
+    void postorderHelper(Node *node) {
         if (node == nullptr) {
             return;
         }
@@ -131,7 +131,7 @@ private:
         std::cout << node->value << " ";
     }
 
-    void printTreeHelper(Node* node, std::string prefix, bool isLast) {
+    void printTreeHelper(Node *node, std::string prefix, bool isLast) {
         if (node == nullptr) {
             return;
         }
